@@ -4,5 +4,5 @@ import React from 'react'
 
 export {
   default as Button,
-  COLORS as BUTTON_COLORS
+  COLORS as BUTTON_COLORS,
 } from './components/Button'

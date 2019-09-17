@@ -20,12 +20,12 @@ const Spinner = ({ color, className }) => (
 
 Spinner.propTypes = {
   color: PropTypes.string,
-  className: PropTypes.string
+  className: PropTypes.string,
 }
 
 Spinner.defaultProps = {
   color: '#fff',
-  className: undefined
+  className: undefined,
 }
 
 export default Spinner

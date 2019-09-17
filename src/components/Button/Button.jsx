@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import Spinner from './../Spinner'
+import Spinner from '../Spinner'
 import styles from './Button.scss'
 
 export const COLORS = {
@@ -10,7 +10,7 @@ export const COLORS = {
   BLACK: 'Gray',
   CHAMBRAY: 'Black',
   ORANGE_TANGO: 'Blue',
-  BABY_BLUE: 'White'
+  BABY_BLUE: 'White',
 }
 
 class Button extends Component {
@@ -23,7 +23,7 @@ class Button extends Component {
     noFill: PropTypes.bool,
     /** Has impact only if `noFill` is `true` */
     noOutline: PropTypes.bool,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -33,19 +33,22 @@ class Button extends Component {
     roundish: false,
     noFill: false,
     noOutline: false,
-    disabled: false
+    disabled: false,
   }
 
-  getColorStyleForButton = () => styles[`button${this.props.color}`]
+  getColorStyleForButton = () => {
+    const { color } = this.props
+    return styles[`button${color}`]
+  }
 
   handleClick = () => {
-    const { disabled, isLoading } = this.props
+    const { disabled, isLoading, onClick } = this.props
     if (disabled || isLoading) {
       return
     }
 
-    if (this.props.onClick) {
-      this.props.onClick()
+    if (onClick) {
+      onClick()
     }
   }
 
@@ -74,8 +77,9 @@ class Button extends Component {
             [styles.fillWidth]: fillWidth,
             [styles.roundish]: roundish,
             [styles.noFill]: noFill,
-            [styles.noOutline]: noOutline
-          })}
+            [styles.noOutline]: noOutline,
+          },
+        )}
       >
         {isLoading ? <Spinner /> : children}
       </button>

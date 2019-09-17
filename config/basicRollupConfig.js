@@ -1,22 +1,36 @@
 // Rollup plugins.
 import babel from 'rollup-plugin-babel'
-import cjs from 'rollup-plugin-commonjs'
+import commonjs from 'rollup-plugin-commonjs'
 import globals from 'rollup-plugin-node-globals'
 import replace from 'rollup-plugin-replace'
 import resolve from 'rollup-plugin-node-resolve'
 import typescript from 'rollup-plugin-typescript'
 import postcss from 'rollup-plugin-postcss'
-import eslint from 'rollup-plugin-eslint'
+import { eslint } from 'rollup-plugin-eslint'
 import reactSvg from 'rollup-plugin-react-svg'
 
 const basicRollupConfig = ({ nodeModulesPath }) => ({
   input: 'src/index.js',
   output: {
+    name: 'uiKitLibrary',
     file: 'build/app.js',
     format: 'umd'
   },
-  name: 'uiKitLibrary',
   plugins: [
+    resolve({
+      browser: true,
+      mainFields: ['module', 'main']
+    }),
+    commonjs({
+      exclude: `${nodeModulesPath}/process-es6/**`,
+      include: `${nodeModulesPath}/**`,
+      namedExports: {
+        [`${nodeModulesPath}/react/index.js`]: ['Children', 'Component', 'PropTypes', 'createElement'],
+        [`${nodeModulesPath}/react-dom/index.js`]: ['render'],
+        [`${nodeModulesPath}/react-svg/node_modules/prop-types/index.js`]:
+          ['oneOf', 'func', 'string', 'bool', 'object']
+      }
+    }),
     eslint({
       include: ['**/*.js', '**/*.jsx', '**/*.mjs'],
       throwOnError: true
@@ -31,33 +45,14 @@ const basicRollupConfig = ({ nodeModulesPath }) => ({
     }),
     typescript(),
     babel({
-      babelrc: false,
-      exclude: [`${nodeModulesPath}/**`],
-      ignore: ['**/*.scss'],
-      presets: [['es2015', { modules: false }], 'stage-0', 'react'],
-      plugins: ['external-helpers'],
-    }),
-    cjs({
-      exclude: `${nodeModulesPath}/process-es6/**`,
-      include: `${nodeModulesPath}/**`,
-      namedExports: {
-        [`${nodeModulesPath}/react/index.js`]: ['Children', 'Component', 'PropTypes', 'createElement'],
-        [`${nodeModulesPath}/react-dom/index.js`]: ['render'],
-        [`${nodeModulesPath}/react-svg/node_modules/prop-types/index.js`]:
-          ['oneOf', 'func', 'string', 'bool', 'object']
-      }
+      exclude: ['node_modules/**']
     }),
     globals(),
     replace({ 'process.env.NODE_ENV': JSON.stringify('development') }),
-    resolve({
-      browser: true,
-      main: true
-    }),
     postcss({
       modules: true
     })
   ],
-  sourcemap: false
 })
 
 export default basicRollupConfig
