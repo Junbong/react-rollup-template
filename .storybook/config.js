@@ -1,16 +1,16 @@
-import { configure } from '@storybook/react';
-import { setOptions } from '@storybook/addon-options'
+import { addParameters, configure } from '@storybook/react'
 import appPackage from '../package.json'
 
 function loadStories() {
-  require('../src/stories');
+  const req = require.context('../stories', true, /\.stories\.js$/)
+  req.keys().forEach(filename => req(filename))
 }
 
-setOptions({
+addParameters({
   name: `My Storybook v${appPackage.version}`,
   url: '/storybook/index.html',
   addonPanelInRight: true,
   hierarchySeparator: /\//
 })
 
-configure(loadStories, module);
+configure(loadStories, module)
