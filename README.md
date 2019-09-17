@@ -1,9 +1,15 @@
-# react-storybook-rollup
-**Maintain your UI library as a separate project!**
+# react-rollup-template
+
+#### NOTE: Before getting started
+This template project is based on [react-storybook-rollup](https://github.com/pppemo/react-storybook-rollup) by [Przemek Krupiński](https://github.com/pppemo) but this has many differences from the original because of many major updates of most of core library and configurations.
+
+----
+
+**Boiler plate for React + Rollup + Storybook + Typescript!**
 
 This project contains a combination of:
-* [Storybook](https://storybook.js.org) - the UI environment for developing React components
 * [Rollup](https://rollupjs.org) - module bundler that bundles all your components
+* [Storybook](https://storybook.js.org) - the UI environment for developing React components
 
 ### What does it do?
 * It lets you develop your React components in isolation
@@ -13,7 +19,7 @@ This project contains a combination of:
 ### Usage
 #### Storybook
 1. Run `npm install`
-2. Run `npm run storybook` in order to run Storybook, visit localhost:6006
+2. Run `npm run storybook` in order to run Storybook, visit [localhost:4000](http://localhost:4000/)
 
 You can also build a static version of Storybook (that could be deployed to some shared location) by running `npm run build-storybook`
 
