@@ -29,6 +29,7 @@ const basicRollupConfig = ({ nodeModulesPath }) => ({
       },
       jsx: false
     }),
+    typescript(),
     babel({
       babelrc: false,
       exclude: [`${nodeModulesPath}/**`],
