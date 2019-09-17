@@ -15,6 +15,13 @@
     "template",
     "boilerplate"
   ],
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "not ie < 9",
+    "not dead",
+    "maintained node versions"
+  ],
   "scripts": {
     "build:prod": "rollup -c config/production.js",
     "build:dev-w": "rollup -c config/development.js -w",
