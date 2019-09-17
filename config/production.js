@@ -3,7 +3,7 @@ import replace from 'rollup-plugin-replace'
 import uglify from 'rollup-plugin-uglify'
 
 // Import the development configuration.
-import config from './dev'
+import config from './development'
 
 // Inject the production settings.
 config.output.file = 'build/app.js'
